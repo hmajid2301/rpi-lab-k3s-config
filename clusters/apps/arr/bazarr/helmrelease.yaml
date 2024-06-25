@@ -20,9 +20,19 @@ spec:
   values:
     controllers:
       bazarr:
-        annotations:
-          reloader.stakater.com/auto: "true"
+        enabled: true
+        type: statefulset
 
+        replicas: 1
+
+        statefulset:
+          volumeClaimTemplates:
+            - name: config
+              accessMode: ReadWriteOnce
+              size: 500Mi
+              storageClass: longhorn
+              globalMounts:
+                - path: /config
         pod:
           securityContext:
             runAsUser: 568
