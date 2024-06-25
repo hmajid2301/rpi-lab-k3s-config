@@ -5,6 +5,7 @@ metadata:
   namespace: flux-system
   annotations:
     spec.ingressClassName: "traefik"
+    traefik.ingress.kubernetes.io/router.middlewares: "auth-ak-outpost-authentik-embedded-outpost@kubernetescrd"
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
 spec:
   rules:
