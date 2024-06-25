@@ -29,27 +29,27 @@ spec:
               - alertmanager.homelab.haseebmajid.dev
             secretName: alertmanager-haseebmajid-dev-tls
     grafana:
-      extraSecretMounts:
-        - name: auth-grafana-oauth-secret-mount
-          secretName: grafana-oauth
-          defaultMode: 0440
-          mountPath: /etc/secrets/grafana-oauth
-          readOnly: true
-      grafana.ini:
-        server:
-          root_url: https://grafana.homelab.haseebmajid.dev
-        auth:
-            signout_redirect_url: "https://auth.homelab.haseebmajid.dev/application/o/grafana/end-session/"
-            oauth_auto_login: true
-        auth.generic_oauth:
-            name: authentik
-            enabled: true
-            client_id: $__file{/etc/secrets/grafana-oauth/client-id}
-            client_secret: $__file{/etc/secrets/grafana-oauth/client-secret}
-            scopes: "openid profile email"
-            auth_url: "https://auth.homelab.haseebmajid.dev/application/o/authorize/"
-            token_url: "https://auth.homelab.haseebmajid.dev/application/o/token/"
-            api_url: "https://auth.homelab.haseebmajid.dev/application/o/userinfo/"
+      # extraSecretMounts:
+      #   - name: auth-grafana-oauth-secret-mount
+      #     secretName: grafana-oauth
+      #     defaultMode: 0440
+      #     mountPath: /etc/secrets/grafana-oauth
+      #     readOnly: true
+      # grafana.ini:
+      #   server:
+      #     root_url: https://grafana.homelab.haseebmajid.dev
+      #   auth:
+      #       signout_redirect_url: "https://auth.homelab.haseebmajid.dev/application/o/grafana/end-session/"
+      #       oauth_auto_login: true
+      #   auth.generic_oauth:
+      #       name: authentik
+      #       enabled: true
+      #       client_id: $__file{/etc/secrets/grafana-oauth/client-id}
+      #       client_secret: $__file{/etc/secrets/grafana-oauth/client-secret}
+      #       scopes: "openid profile email"
+      #       auth_url: "https://auth.homelab.haseebmajid.dev/application/o/authorize/"
+      #       token_url: "https://auth.homelab.haseebmajid.dev/application/o/token/"
+      #       api_url: "https://auth.homelab.haseebmajid.dev/application/o/userinfo/"
       ingress:
         enabled: true
         className: traefik
