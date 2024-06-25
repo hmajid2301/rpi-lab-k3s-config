@@ -1,32 +1,80 @@
+---
+# yaml-language-server: $schema=https://raw.githubusercontent.com/bjw-s/helm-charts/main/charts/other/app-template/schemas/helmrelease-helm-v2.schema.json
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: bazarr
-  namespace: apps
 spec:
+  interval: 30m
   chart:
     spec:
-      chart: bazarr
+      chart: app-template
+      version: 3.2.1
       sourceRef:
         kind: HelmRepository
-        name: adminafk
-        namespace: apps
-      version: 0.3.2
-  interval: 1h
+        name: bjw-s-charts
+        namespace: flux-system
+      interval: 30m
+  maxHistory: 2
   values:
+    controllers:
+      bazarr:
+        annotations:
+          reloader.stakater.com/auto: "true"
+
+        pod:
+          securityContext:
+            runAsUser: 568
+            runAsGroup: 568
+            fsGroup: 568
+            fsGroupChangePolicy: "OnRootMismatch"
+
+        containers:
+          app:
+            image:
+              repository: ghcr.io/onedr0p/bazarr
+              tag: 1.4.3
+
+            probes:
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+              startup:
+                enabled: true
+                spec:
+                  failureThreshold: 30
+                  periodSeconds: 5
+
+            resources:
+              requests:
+                memory: 250M
+                cpu: 10m
+              limits:
+                memory: 250M
+
+    service:
+      app:
+        controller: bazarr
+        ports:
+          http:
+            port: 6767
+
     ingress:
-      enabled: true
-      className: traefik
-      annotations:
-        kubernetes.io/ingress.class: "traefik"
-        cert-manager.io/cluster-issuer: "letsencrypt-prod"
-        traefik.ingress.kubernetes.io/router.middlewares: "auth-ak-outpost-authentik-embedded-outpost@kubernetescrd"
-      hosts:
-        - host: bazarr.homelab.haseebmajid.dev
-          paths:
-            - path: /
-              pathType: ImplementationSpecific
-      tls:
-        - hosts:
-            - bazarr.homelab.haseebmajid.dev
-          secretName: bazarr-haseebmajid-dev-tls
+      app:
+        className: traefik
+        annotations:
+          kubernetes.io/ingress.class: "traefik"
+          cert-manager.io/cluster-issuer: "letsencrypt-prod"
+          traefik.ingress.kubernetes.io/router.middlewares: "auth-ak-outpost-authentik-embedded-outpost@kubernetescrd"
+        hosts:
+          - host: bazarr.homelab.haseebmajid.dev
+            paths:
+              - path: /
+                pathType: Prefix
+                service:
+                  identifier: app
+                  port: http
+        tls:
+          - hosts:
+              - bazarr.homelab.haseebmajid.dev
