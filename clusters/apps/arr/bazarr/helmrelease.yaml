@@ -14,19 +14,19 @@ spec:
       version: 0.4.0
   interval: 1h
   values:
-    # ingress:
-    #   enabled: true
-    #   className: traefik
-    #   annotations:
-    #     kubernetes.io/ingress.class: "traefik"
-    #     cert-manager.io/cluster-issuer: "letsencrypt-prod"
-    #     traefik.ingress.kubernetes.io/router.middlewares: "auth-ak-outpost-authentik-embedded-outpost@kubernetescrd"
-    #   hosts:
-    #     - host: bazarr.homelab.haseebmajid.dev
-    #       paths:
-    #         - path: /
-    #           pathType: ImplementationSpecific
-    #   tls:
-    #     - hosts:
-    #         - bazarr.homelab.haseebmajid.dev
-    #       secretName: bazarr-haseebmajid-dev-tls
+    ingress:
+      enabled: true
+      className: traefik
+      annotations:
+        kubernetes.io/ingress.class: "traefik"
+        cert-manager.io/cluster-issuer: "letsencrypt-prod"
+        traefik.ingress.kubernetes.io/router.middlewares: "auth-ak-outpost-authentik-embedded-outpost@kubernetescrd"
+      hosts:
+        - host: bazarr.homelab.haseebmajid.dev
+          paths:
+            - path: /
+              pathType: ImplementationSpecific
+      tls:
+        - hosts:
+            - bazarr.homelab.haseebmajid.dev
+          secretName: bazarr-haseebmajid-dev-tls
