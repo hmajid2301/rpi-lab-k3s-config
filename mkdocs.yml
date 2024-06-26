@@ -72,8 +72,28 @@ markdown_extensions:
   - pymdownx.tilde
 
 nav:
-  - Introduction: index.md # formerly hardlinked to README.md
-  - NixOS: nixos.md
-  - Cluster: cluster.md
-  - Apps: apps.md
+  - Home: index.md # formerly hardlinked to README.md
+  - OS:
+    - NixOS: OS/nixos.md
+  - Hardware:
+     - Cluster: hardware/cluster.md
+     - Smart Home: hardware/smart-home.md
+     - Network: hardware/networking.md
+  - Services:
+     - Auth: services/auth.md
+     - Apps: services/apps.md
+     - Media: services/media.md
+     - Storage: services/storage.md
+  - Recipes:
+    - NixOS:
+      - Install: recipes/k3s.md
+      - K3s: recipes/k3s.md
+      - Sops: recipes/k3s.md
+      - Tailscale: recipes/k3s.md
+      - Deploy: recipes/k3s.md
+    - Kubernetes:
+      - Traefik: recipes/cert-manager.md
+      - Cert Manager: recipes/cert-manager.md
+      - Longhorn: recipes/longhorn.md
+      - Authentik: recipes/authentik.md
   - Images: images.md

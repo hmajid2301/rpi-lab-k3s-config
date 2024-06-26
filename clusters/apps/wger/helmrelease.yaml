@@ -1,0 +1,29 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: wger
+  namespace: apps
+spec:
+  chart:
+    spec:
+      chart: wger
+      sourceRef:
+        kind: HelmRepository
+        name: wger
+        namespace: apps
+      version: 0.2.0
+  interval: 1h
+  values:
+    postgres.storage:
+        className: "longhorn"
+        requestedSize: 8Gi
+    app:
+      nginx.enabled: true
+      persistence:
+        enabled: true
+        storageClass: "longhorn"
+        accessModes:
+          - ReadWriteMany
+        sizeMedia: 8Gi
+        sizeStatic: 8Gi
+        sizeCeleryBeat: 1Gi

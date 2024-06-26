@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: wger
+  namespace: apps
+  annotations:
+    spec.ingressClassName: "traefik"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  rules:
+    - host: wger.homelab.haseebmajid.dev
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: wger-http
+                port:
+                  number: 8000
+  tls:
+    - hosts:
+        - wger.homelab.haseebmajid.dev
+      secretName: wger-haseebmajid-dev-tls

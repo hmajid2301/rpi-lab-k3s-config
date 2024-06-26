@@ -1,4 +1,4 @@
 # Images
 
-![Pi Cluster](images/pi-cluster-front.jpeg)
+![Cluster](images/rack.jpg)
 ![Dashboard](images/dashboard.png)
