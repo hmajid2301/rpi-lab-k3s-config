@@ -7,6 +7,6 @@ roleRef:
   kind: ClusterRole
   name: cluster-admin
 subjects:
-- kind: ServiceAccount
-  name: dashboard-user
-  namespace: monitoring
+  - kind: ServiceAccount
+    name: dashboard-user
+    namespace: monitoring

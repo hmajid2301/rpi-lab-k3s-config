@@ -15,8 +15,8 @@ spec:
   interval: 1h
   values:
     postgres.storage:
-        className: "longhorn"
-        requestedSize: 8Gi
+      className: "longhorn"
+      requestedSize: 8Gi
     app:
       nginx.enabled: true
       persistence:

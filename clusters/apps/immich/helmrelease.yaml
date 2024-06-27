@@ -1,4 +1,3 @@
-
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -39,11 +38,8 @@ spec:
               CREATE EXTENSION cube;
               CREATE EXTENSION earthdistance;
               CREATE EXTENSION vectors;
-
     redis:
       enabled: true
       architecture: standalone
       auth:
         enabled: false
-
-

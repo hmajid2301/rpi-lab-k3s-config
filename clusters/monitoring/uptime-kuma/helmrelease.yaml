@@ -1,4 +1,3 @@
-
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
@@ -39,4 +38,3 @@ spec:
       runAsGroup: 3310
       fsGroup: 3310
       fsGroupChangePolicy: "OnRootMismatch"
-

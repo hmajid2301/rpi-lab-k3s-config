@@ -43,6 +43,7 @@ flux reconcile  source git flux-system
 ## System Configuration
 
 Each device is configured and runs NixOS, you can find their specific configuration [here](https://gitlab.com/hmajid2301/dotfiles).
+
 ## Images
 
 ![Rack](docs/images/rack.jpg)
@@ -50,6 +51,5 @@ Each device is configured and runs NixOS, you can find their specific configurat
 
 ## More Information
 
-- Hosts Managed by Nix: https://gitlab.com/hmajid2301/dotfiles
-- Blog Post: https://haseebmajid.dev/posts/2023-11-18-how-i-setup-my-raspberry-pi-cluster-with-nixos/
-
+- [Bare metal managed by Nix](https://gitlab.com/hmajid2301/dotfiles)
+- [Blog posts documenting my journey](https://haseebmajid.dev/posts/2023-11-18-how-i-setup-my-raspberry-pi-cluster-with-nixos/)

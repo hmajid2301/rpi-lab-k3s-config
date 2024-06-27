@@ -24,8 +24,8 @@ spec:
       NEXTAUTH_URL: https://homarr.homelab.haseebmajid.dev
     envSecrets:
       AUTH_OIDC_CLIENT_ID:
-       name: homarr-oauth
-       key: client-id
+        name: homarr-oauth
+        key: client-id
       AUTH_OIDC_CLIENT_SECRET:
         name: homarr-oauth
         key: client-secret
@@ -63,5 +63,3 @@ spec:
         - hosts:
             - homarr.homelab.haseebmajid.dev
           secretName: homarr-haseebmajid-dev-tls
-
-

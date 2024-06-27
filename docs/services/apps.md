@@ -1,10 +1,13 @@
 # Apps
+
 The apps deployed on my home cluster.
 
 ## Kubernetes
 
 ### General
+
 - Authentik
+
 ### Dashboard
 
 - Homarr
@@ -23,7 +26,6 @@ The apps deployed on my home cluster.
   - Sonarr
   - Powlarr
 
-
 ### Apps
 
 - GitLab Runner
@@ -32,5 +34,3 @@ The apps deployed on my home cluster.
   - With Sonoff Zigbee Dongle plugged into um790
 - Time Tagger
 - Tandoor
-- Wger
-

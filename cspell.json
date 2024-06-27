@@ -1,0 +1,21 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "ignorePaths": [
+    "LICENSE",
+    "docs/**/*.md",
+    ".gitignore",
+    "*.nix",
+    "*.yml",
+    "*.yaml"
+  ],
+  "words": [
+    "hmajid",
+    "Authentik",
+    "Tailscale",
+    "Twingate",
+    "homelab",
+    "direnv"
+  ],
+  "flagWords": []
+}

@@ -2,11 +2,9 @@ site_name: Haseeb Majid | Home Lab
 site_description: Details about my home lab cluster setup using k3s.
 site_author: Haseeb Majid
 site_url: https://docs.home-lab.haseebmajid.dev
-
 repo_name: hmajid2301/home-lab
 repo_url: https://gitlab.com/hmajid2301/home-lab
 edit_uri: "edit/main/docs"
-
 theme:
   name: material
   icon:
@@ -34,11 +32,8 @@ theme:
   font:
     text: Roboto
     code: Roboto Mono
-
 docs_dir: ./docs
-
 markdown_extensions:
-
   # Python Markdown
   - abbr
   - admonition
@@ -48,7 +43,6 @@ markdown_extensions:
   - md_in_html
   - toc:
       permalink: true
-
   # Python Markdown Extensions
   - pymdownx.arithmatex:
       generic: true
@@ -70,30 +64,29 @@ markdown_extensions:
   - pymdownx.tasklist:
       custom_checkbox: true
   - pymdownx.tilde
-
 nav:
   - Home: index.md # formerly hardlinked to README.md
   - OS:
-    - NixOS: OS/nixos.md
+      - NixOS: OS/nixos.md
   - Hardware:
-     - Cluster: hardware/cluster.md
-     - Smart Home: hardware/smart-home.md
-     - Network: hardware/networking.md
+      - Cluster: hardware/cluster.md
+      - Smart Home: hardware/smart-home.md
+      - Network: hardware/networking.md
   - Services:
-     - Auth: services/auth.md
-     - Apps: services/apps.md
-     - Media: services/media.md
-     - Storage: services/storage.md
+      - Auth: services/auth.md
+      - Apps: services/apps.md
+      - Media: services/media.md
+      - Storage: services/storage.md
   - Recipes:
-    - NixOS:
-      - Install: recipes/k3s.md
-      - K3s: recipes/k3s.md
-      - Sops: recipes/k3s.md
-      - Tailscale: recipes/k3s.md
-      - Deploy: recipes/k3s.md
-    - Kubernetes:
-      - Traefik: recipes/cert-manager.md
-      - Cert Manager: recipes/cert-manager.md
-      - Longhorn: recipes/longhorn.md
-      - Authentik: recipes/authentik.md
+      - NixOS:
+          - Install: recipes/k3s.md
+          - K3s: recipes/k3s.md
+          - Sops: recipes/k3s.md
+          - Tailscale: recipes/k3s.md
+          - Deploy: recipes/k3s.md
+      - Kubernetes:
+          - Traefik: recipes/cert-manager.md
+          - Cert Manager: recipes/cert-manager.md
+          - Longhorn: recipes/longhorn.md
+          - Authentik: recipes/authentik.md
   - Images: images.md

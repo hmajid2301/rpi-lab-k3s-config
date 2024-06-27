@@ -1,11 +1,13 @@
 version: "3"
-
 tasks:
+  check:
+    desc: Run all flake checks
+    cmds:
+      - nix flake check
   test:site:
     desc: Build test site.
     cmds:
       - mkdocs build --strict --verbose --site-dir test
-
   site:
     desc: Build site.
     cmds:

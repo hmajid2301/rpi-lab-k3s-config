@@ -16,11 +16,11 @@ spec:
   values:
     worker:
       env:
-      - name: AUTHENTIK_SECRET_KEY
-        valueFrom:
-          secretKeyRef:
-            name: authentik-secrets
-            key: secret_key
+        - name: AUTHENTIK_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: authentik-secrets
+              key: secret_key
     server:
       ingress:
         enabled: true
@@ -35,17 +35,17 @@ spec:
               - auth.homelab.haseebmajid.dev
             secretName: auth-haseebmajid-dev-tls
       env:
-      - name: AUTHENTIK_SECRET_KEY
-        valueFrom:
-          secretKeyRef:
-            name: authentik-secrets
-            key: secret_key
+        - name: AUTHENTIK_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: authentik-secrets
+              key: secret_key
     authentik:
       postgresql:
-          password: "ThisIsNotASecurePassword"
+        password: "ThisIsNotASecurePassword"
     postgresql:
-        enabled: true
-        auth:
-            password: "ThisIsNotASecurePassword"
+      enabled: true
+      auth:
+        password: "ThisIsNotASecurePassword"
     redis:
-        enabled: true
+      enabled: true

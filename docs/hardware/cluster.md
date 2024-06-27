@@ -10,6 +10,7 @@ These are all the nodes in my home lab, all of them are running NixOS you can fi
 | [`um790`](https://gitlab.com/hmajid2301/dotfiles/-/blob/main/systems/x86_64-linux/um790/default.nix?ref_type=heads)                                           |  UM790                                                    |  AMD Ryzen 9 7940HS                                            | 64GB        | AMD Radeon™ 780M           |
 | [`ms01`](https://gitlab.com/hmajid2301/dotfiles/-/blob/main/systems/x86_64-linux/ms01/default.nix?ref_type=heads)                                             | Framework 12th Gen Intel                                  |  i9-13900H                                                     | 32GB        | Intel Iris Graphics        |
 | [`s100`](https://gitlab.com/hmajid2301/dotfiles/-/blob/main/systems/x86_64-linux/s100/default.nix?ref_type=heads)                                             | Framework 12th Gen Intel                                  |  i7-1280P                                                      | 32GB        | Intel Iris Graphics        |
+
 ## Setup
 
 This repository uses fluxcd for GitOps, to automatically deploy changes made to this repository on the main branch.
@@ -31,6 +32,4 @@ flux bootstrap gitlab \
         --branch=main \
         --path=clusters/ \
         --personal --deploy-token-auth
-
 ```
-

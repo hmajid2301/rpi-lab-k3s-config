@@ -1,4 +1,4 @@
-# 👋 Hello!
+# 👋 Hello
 
 Hey there! 👋
 

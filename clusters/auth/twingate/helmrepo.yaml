@@ -7,5 +7,3 @@ spec:
   interval: 1h
   provider: generic
   url: https://twingate.github.io/helm-charts
-
-
