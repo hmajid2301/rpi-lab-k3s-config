@@ -1,9 +1,9 @@
+---
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
-  name: oben01
+  name: selfhosted-helmcharts
   namespace: apps
 spec:
   interval: 1h
-  provider: generic
-  url: https://oben01.github.io/charts/
+  url: https://vyrtualsynthese.github.io/selfhosted-helmcharts/

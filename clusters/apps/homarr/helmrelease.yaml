@@ -4,62 +4,101 @@ metadata:
   name: homarr
   namespace: apps
 spec:
+  interval: 5m
   chart:
     spec:
-      chart: homarr
+      chart: app-template
+      version: 3.2.1
       sourceRef:
         kind: HelmRepository
-        name: oben01
+        name: bjw-s-charts
         namespace: apps
-      version: 1.2.5
-  interval: 1h
+      interval: 1h
   values:
-    env:
-      AUTH_OIDC_ADMIN_GROUP: "authentik Admins"
-      AUTH_PROVIDER: oidc
-      AUTH_OIDC_URI: https://auth.homelab.haseebmajid.dev/application/o/homarr
-      AUTH_OIDC_CLIENT_NAME: authentik
-      AUTH_OIDC_AUTO_LOGIN: true
-      BASE_URL: homarr.homelab.haseebmajid.dev
-      NEXTAUTH_URL: https://homarr.homelab.haseebmajid.dev
-    envSecrets:
-      AUTH_OIDC_CLIENT_ID:
-        name: homarr-oauth
-        key: client-id
-      AUTH_OIDC_CLIENT_SECRET:
-        name: homarr-oauth
-        key: client-secret
-    persistence:
-      - name: homarr-config
-        enabled: true
-        storageClassName: "longhorn"
-        accessMode: "ReadWriteOnce"
-        size: "50Mi"
-        mountPath: "/app/data/configs"
-      - name: homarr-database
-        enabled: true
-        storageClassName: "longhorn"
-        accessMode: "ReadWriteOnce"
-        size: "50Mi"
-        mountPath: "/app/database"
-      - name: homarr-icons
-        enabled: true
-        storageClassName: "longhorn"
-        accessMode: "ReadWriteOnce"
-        size: "50Mi"
-        mountPath: "/app/public/icons"
+    defaultPodOptions:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65534
+        runAsGroup: 65534
+        fsGroup: 65534
+        fsGroupChangePolicy: OnRootMismatch
+        seccompProfile:
+          type: RuntimeDefault
+    controllers:
+      homarr:
+        replicas: 1
+        containers:
+          homarr:
+            image:
+              repository: ghcr.io/ajnart/homarr
+              tag: "0.15.3"
+              pullPolicy: IfNotPresent
+            env:
+              DEFAULT_COLOR_SCHEME: dark
+              DISABLE_ANALYTICS: true
+            resources:
+              limits:
+                cpu: 500m
+                memory: 512Mi
+              requests:
+                cpu: 100m
+                memory: 256Mi
+            probes:
+              liveness:
+                enabled: true
+              readiness:
+                enabled: true
+              startup:
+                enabled: true
+                spec:
+                  periodSeconds: 5
+                  failureThreshold: 30
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop: ["ALL"]
+    service:
+      homarr:
+        controller: homarr
+        ports:
+          http:
+            port: 7575
+
     ingress:
-      enabled: true
-      className: traefik
-      annotations:
-        kubernetes.io/ingress.class: "traefik"
-        cert-manager.io/cluster-issuer: "letsencrypt-prod"
-      hosts:
-        - host: homarr.homelab.haseebmajid.dev
-          paths:
-            - path: /
-              pathType: ImplementationSpecific
-      tls:
-        - hosts:
-            - homarr.homelab.haseebmajid.dev
-          secretName: homarr-haseebmajid-dev-tls
+      homarr:
+        className: "traefik"
+        annotations:
+          kubernetes.io/ingress.class: "traefik"
+          cert-manager.io/cluster-issuer: "letsencrypt-prod"
+        hosts:
+          - host: homarr.homelab.haseebmajid.dev
+            paths:
+              - path: /
+                service:
+                  identifier: homarr
+                  port: http
+        tls:
+          - hosts:
+              - homarr.homelab.haseebmajid.dev
+    persistence:
+      config:
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        size: 50Mi
+        storageClass: longhorn
+        globalMounts:
+          - path: /app/data/configs
+      database:
+        type: persistentVolumeClaim
+        accessMode: ReadWriteOnce
+        storageClass: longhorn
+        size: 50Mi
+        globalMounts:
+          - path: /data
+      icons:
+        type: persistentVolumeClaim
+        storageClass: longhorn
+        accessMode: ReadWriteOnce
+        size: 50Mi
+        globalMounts:
+          - path: /app/public/icons

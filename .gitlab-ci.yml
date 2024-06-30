@@ -6,14 +6,12 @@ lint:
   stage: test
   extends:
     - .nix
-  tags: []
   script:
     - nix develop -c task check
 test:
   stage: test
   extends:
     - .nix
-  tags: []
   script:
     - nix develop -c task test:site
   rules:
@@ -24,7 +22,6 @@ pages:
   stage: deploy
   extends:
     - .nix
-  tags: []
   script:
     - nix develop -c task site
   artifacts:

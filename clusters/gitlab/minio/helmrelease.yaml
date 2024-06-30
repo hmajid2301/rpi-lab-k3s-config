@@ -1,0 +1,34 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: minio
+  namespace: gitlab
+spec:
+  chart:
+    spec:
+      chart: minio
+      sourceRef:
+        kind: HelmRepository
+        name: minio
+        namespace: gitlab
+      version: 5.2.0
+  interval: 1h
+  values:
+    replicas: 2
+    persistence:
+      enabled: true
+      storageClass: longhorn
+      accessMode: ReadWriteOnce
+      size: 20Gi
+    consoleIngress:
+      enabled: true
+      ingressClassName: traefik
+      annotations:
+        kubernetes.io/ingress.class: "traefik"
+        cert-manager.io/cluster-issuer: "letsencrypt-prod"
+      hosts:
+        - console.minio.homelab.haseebmajid.dev
+      tls:
+        - hosts:
+            - console.minio.homelab.haseebmajid.dev
+          secretName: minio-haseebmajid-dev-tls

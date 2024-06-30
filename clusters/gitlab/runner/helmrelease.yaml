@@ -19,3 +19,24 @@ spec:
       create: true
     runners:
       secret: gitlab-runner-secret
+    cache:
+        secretName: minio-secret
+    # TODO: turn this into a secret here and in minio
+    config: |
+      [[runners]]
+        [runners.cache]
+          Type = "s3"
+          Path = "runner"
+          Shared = true
+          [runners.cache.s3]
+          ServerAddress = "minio.gitlab.svc.cluster.local:9090"
+            BucketName = "gitlab-runner"
+            Insecure = true
+            AuthenticationType = "access-key"
+        [runners.kubernetes]
+          image = "ubuntu:24.04"
+          privileged = true
+        [[runners.kubernetes.volumes.empty_dir]]
+          name = "docker-certs"
+          mount_path = "/var/run"
+          medium = "Memory"

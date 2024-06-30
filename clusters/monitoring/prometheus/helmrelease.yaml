@@ -64,6 +64,9 @@ spec:
               - grafana.homelab.haseebmajid.dev
             secretName: grafana-haseebmajid-dev-tls
     prometheus:
+      prometheusSpec:
+        retention: 3d
+      persistentVolume.storageClass: longhorn
       ingress:
         enabled: true
         className: traefik
