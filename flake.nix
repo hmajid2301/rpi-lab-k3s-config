@@ -26,9 +26,9 @@
           markdownlint.enable = true;
 
           trim-trailing-whitespace.enable = true;
-          cspell = {
-            enable = true;
-          };
+          # cspell = {
+          #   enable = true;
+          # };
 
           yamllint.enable = true;
           yamlfmt.enable = true;
