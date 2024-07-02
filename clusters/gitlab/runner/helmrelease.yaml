@@ -29,7 +29,7 @@ spec:
           Path = "runner"
           Shared = true
           [runners.cache.s3]
-          ServerAddress = "minio.gitlab.svc.cluster.local:9000"
+            ServerAddress = "minio.gitlab.svc.cluster.local:9000"
             BucketName = "gitlab-runner"
             Insecure = true
             AuthenticationType = "access-key"
